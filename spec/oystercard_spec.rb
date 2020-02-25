@@ -20,6 +20,12 @@ describe Oystercard do
     expect{subject.top_up(70)}.to raise_error "top up limit exceeded"
   end
 
+  it "charges money when journey starts" do
+    subject.top_up(50)
+    subject.touch_in
+expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
+  end
+
   it "deducts fare from the card" do
     subject.top_up(50)
     expect{subject.deduct(5)}.to change {subject.balance}.by(-5)

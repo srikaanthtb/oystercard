@@ -1,12 +1,14 @@
 class Oystercard
-  attr_reader :balance, :max_balance, :limit, :status, :min_balance
+  attr_reader :balance, :max_balance, :limit, :status, :min_balance, :min_charge
   MAX_BALANCE = 90
   MIN_BALANCE = 1
+  MINIMUM_CHARGE = 5
   def initialize
     @balance = 0
     @max_balance = MAX_BALANCE
     @status = false
     @min_balance = MIN_BALANCE
+    @min_charge =  MINIMUM_CHARGE
   end
   def top_up(money)
     @balance += money
@@ -29,6 +31,7 @@ def in_journey?
 end
 
 def touch_out
+  deduct(@min_charge)
   @status = false
 end
 
