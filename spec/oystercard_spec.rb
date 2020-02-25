@@ -27,8 +27,13 @@ describe Oystercard do
 
 describe "#in_journey?" do
   it "check if card is in transit" do
+    subject.top_up(50)
     subject.touch_in
     expect(subject.in_journey?).to eq true
+  end
+
+  it "makes error if there isnt enough money to make journey" do
+    expect{subject.touch_in}.to raise_error "not enough money to make journey"
   end
 
   it "check if card is not in transit" do

@@ -6,6 +6,7 @@ class Oystercard
     @balance = 0
     @max_balance = MAX_BALANCE
     @status = false
+    @min_balance = MIN_BALANCE
   end
   def top_up(money)
     @balance += money
@@ -19,6 +20,7 @@ class Oystercard
   end
 
 def touch_in
+  raise "not enough money to make journey" if @balance < @min_balance
   @status = true
 end
 
