@@ -1,5 +1,7 @@
 require 'oystercard'
 describe Oystercard do
+let(:entry_station) { double :entry_station, station: 1}
+
   it "checks a default balance" do
     expect(subject).to have_attributes(balance: 0)
   end
@@ -26,7 +28,11 @@ describe Oystercard do
 expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
   end
 
-
+it "putsd a entry station on touch in" do
+  subject.top_up(50)
+  subject.touch_in
+  expect( subject.entry_station).to eq 1
+end
 
 describe "#in_journey?" do
   it "check if card is in transit" do
@@ -43,6 +49,13 @@ describe "#in_journey?" do
     subject.touch_out
     expect(subject.in_journey?).to eq false
   end
+it "check that the station is forgotten on exit" do
+  subject.top_up(50)
+  subject.touch_in
+  subject.touch_out
+  expect( subject.entry_station).to eq nil
+end
+
 end
 
 end
