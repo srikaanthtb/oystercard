@@ -26,10 +26,7 @@ describe Oystercard do
 expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
   end
 
-  it "deducts fare from the card" do
-    subject.top_up(50)
-    expect{subject.deduct(5)}.to change {subject.balance}.by(-5)
-  end
+
 
 describe "#in_journey?" do
   it "check if card is in transit" do

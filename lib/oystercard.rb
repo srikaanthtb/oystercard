@@ -16,10 +16,7 @@ class Oystercard
     balance_message
   end
 
-  def deduct(fare)
-    @balance -= fare
-    balance_message
-  end
+
 
 def touch_in
   raise "not enough money to make journey" if @balance < @min_balance
@@ -37,6 +34,11 @@ end
 
 
   private
+
+  def deduct(fare)
+    @balance -= fare
+    balance_message
+  end
 
   def limit(money)
     (@balance = @max_balance; raise "top up limit exceeded") if @balance > @max_balance
