@@ -1,3 +1,5 @@
+require_relative 'journey'
+require_relative 'station'
 class Oystercard
   attr_reader :balance, :max_balance, :limit, :status, :min_balance, :min_charge, :entry_station, :exit_station,
    :journey
@@ -25,8 +27,6 @@ class Oystercard
 def touch_in(entry_station)
   raise "not enough money to make journey" if @balance < @min_balance
   @entry_station = entry_station
-  @journey.push(entry_station)
-  
 end
 
 def in_journey?
@@ -38,7 +38,7 @@ def touch_out(exit_station)
   deduct(@min_charge)
   @journey.push({entry_station:entry_station, exit_station:exit_station})
   @entry_station = nil
-  
+
   exit_station
 end
 
