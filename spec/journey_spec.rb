@@ -57,4 +57,14 @@ describe Journey do
       expect(subject.entry_station).to eq nil
     end
   end
+
+describe "#fare" do
+   it "calculates fare for correct journey" do
+     subject.instance_variable_set(:@balance, 10)
+     subject.start_journey("entry_station")
+     subject.finish_journey("exit_station")
+     expect(subject.fare).to eq(Oystercard::MIN_FARE)
+   end
+end
+
 end

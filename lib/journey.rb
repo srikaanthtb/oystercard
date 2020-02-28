@@ -4,6 +4,7 @@ class Journey
 attr_reader :entry_station, :exit_station
 attr_accessor :current_journey
   PENALTY = 6
+
   def initialize
     @entry_station = nil
     @exit_station = nil
@@ -19,7 +20,7 @@ attr_accessor :current_journey
     fail "Currently not travelling" if @entry_station == nil
     @exit_station = exit_station
     @current_journey = {:entry_station => @entry_station, :exit_station => @exit_station}
-    @entry_station = nil
+   @entry_station = nil
   end
 
   def in_journey?
@@ -28,6 +29,10 @@ attr_accessor :current_journey
     #   return true
     # else false
     # end
+  end
+
+  def fare
+    @current_journey.nil? ? PENALTY : Oystercard::MIN_FARE
   end
 
 end
